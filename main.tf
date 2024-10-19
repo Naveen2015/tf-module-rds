@@ -41,7 +41,7 @@ resource "aws_db_parameter_group" "main" {
 
 }
 resource "aws_rds_cluster" "main" {
-  cluster_identifier      = "aurora-cluster-demo"
+  cluster_identifier      = "aurora-cluster-rds"
   engine                  = "aurora-mysql"
   engine_version          = var.engine_version
   database_name           = "dummy"
@@ -51,7 +51,6 @@ resource "aws_rds_cluster" "main" {
   preferred_backup_window = "07:00-09:00"
   vpc_security_group_ids = [aws_security_group.main.id]
   db_subnet_group_name = aws_db_subnet_group.main.name
-  db_cluster_parameter_group_name = aws_db_parameter_group.main.name
   kms_key_id = var.kms_arn
   port = var.port_no
   skip_final_snapshot = true
